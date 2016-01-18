@@ -25,10 +25,12 @@
 </div>
 <div class="col-md-6">
 
+    @if(Auth::user()->role == 'admin' && !Route::is('perfil.*'))
     <div class="form-group">
         {{ Form::label('role','Selecciones Permisos') }}
         {{ Form::select('role', config('cnea.permisos_form'),null, ['class'=>'form-control input-sm select2']) }}
     </div>
+    @endif
 
     <div class="form-group">
         {{ Form::label('cursos[]','Pertenece a los Cursos') }}
