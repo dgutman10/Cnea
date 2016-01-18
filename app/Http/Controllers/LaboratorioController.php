@@ -30,7 +30,7 @@ class LaboratorioController extends Controller
      */
     public function create()
     {
-        return view('laboratios.create');
+        return view('laboratorios.create');
     }
 
     /**

@@ -24,7 +24,7 @@
                     <div class="panel-heading">Nuevo Laboratorio</div>
                     <div class="panel-body">
                         {{ Form::open(['route'=>['laboratorios.store'], 'method'=>'post']) }}
-                        @include('laoratorios.partials.form')
+                        @include('laboratorios.partials.form')
                         {{ Form::close() }}
                     </div>
                 </div><!-- Fin de panel-body -->
