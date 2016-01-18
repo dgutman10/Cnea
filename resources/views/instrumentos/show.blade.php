@@ -71,7 +71,7 @@
                                                 <dt>Tags relacionados:</dt>
                                                 <dd>
                                                     @foreach($instrumento->tags as $tag)
-                                                        <span class="label label-primary">{{ $tag->nombre }}</span>
+                                                        <a href="{{ route('tags.show',$tag) }}"><span class="label label-primary">{{ $tag->nombre }}</span></a>
                                                     @endforeach
                                                 </dd>
                                             </dl>

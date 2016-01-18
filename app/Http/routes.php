@@ -30,6 +30,7 @@ Route::group(['middleware' => ['web']], function () {
         return redirect()->route('instrumentos.index');
     });
     Route::resource('/instrumentos','InstrumentoController',['only'=>['index','show']]);
+    Route::resource('/tags','TagController',['only'=>['index','show']]);
 });
 
 Route::group(['middleware' => ['web','auth']], function () {
@@ -38,7 +39,7 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::post('/instrumentos/restore/{id}', ['as'=>'instrumentos.restore', 'uses'=>'InstrumentoController@restore']);
     Route::resource('/perfil','PerfilController',['only'=>['edit','update']]);
     Route::resource('/usuarios', 'UsuarioController');
-    Route::resource('/tags','TagController');
+    Route::resource('/tags','TagController',['except'=>['index','show']]);
     Route::resource('/instrumentos','InstrumentoController',['except'=>['index','show']]);
     Route::resource('/cursos','CursoController');
     Route::resource('/laboratorios','LaboratorioController');

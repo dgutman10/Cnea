@@ -10,9 +10,11 @@
                         <a href="{{ route('tags.show',$tag) }}">Datos del Tag</a>
                     </li>
 
+                    @if(Auth::check())
                     <li @if(Route::is('tags.edit')) class="active" @endif>
                         <a href="{{ route('tags.edit',$tag) }}">Editar Tag</a>
                     </li>
+                    @endif
 
                     @if(session()->get('index'))
                         <li>
