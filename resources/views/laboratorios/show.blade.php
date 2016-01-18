@@ -36,11 +36,11 @@
                                 <dt><span class="text-info">Nombre:</span></dt>
                                 <dd>{{ $laboratorio->nombre }}</dd>
                             </dl>
-
-                            {{ Form::open(['route'=>['laboratorios.destroy',$laboratorio],'method'=>'delete']) }}
-                            {{ Form::submit('Eliminar Laboratorio',['class'=>'btn btn-danger']) }}
-                            {{ Form::close() }}
-
+                            @if(Auth::check() and Auth::user()->role == 'admin')
+                                {{ Form::open(['route'=>['laboratorios.destroy',$laboratorio],'method'=>'delete']) }}
+                                {{ Form::submit('Eliminar Laboratorio',['class'=>'btn btn-danger']) }}
+                                {{ Form::close() }}
+                            @endif
                         </div>
 
                     </div>

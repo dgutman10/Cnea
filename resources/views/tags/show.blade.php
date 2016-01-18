@@ -42,11 +42,11 @@
 
 
                             </dl>
-
-                            {{ Form::open(['route'=>['tags.destroy',$tag],'method'=>'delete']) }}
-                            {{ Form::submit('Eliminar Tag',['class'=>'btn btn-danger']) }}
-                            {{ Form::close() }}
-
+                            @if(Auth::check() and Auth::user()->role == 'admin')
+                                {{ Form::open(['route'=>['tags.destroy',$tag],'method'=>'delete']) }}
+                                {{ Form::submit('Eliminar Tag',['class'=>'btn btn-danger']) }}
+                                {{ Form::close() }}
+                            @endif
                             <hr>
                         </div>
 

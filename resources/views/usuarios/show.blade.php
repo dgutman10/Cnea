@@ -88,14 +88,16 @@
                             @endif
 
                             <hr>
-                            @if($usuario->deleted_at == null)
-                                {{ Form::open(['route'=>['usuarios.destroy',$usuario],'method'=>'delete']) }}
-                                    {{ Form::submit('Eliminar Usuario',['class'=>'btn btn-danger pull-right']) }}
-                                {{ Form::close() }}
-                            @else
-                                {{ Form::model($usuario,['route'=>['usuarios.restore',$usuario],'method'=>'post']) }}
-                                    {{ Form::submit('Restaurar Usuario',['class'=>'btn btn-success pull-right']) }}
-                                {{ Form::close() }}
+                            @if(Auth::check() and Auth::user()->role == 'admin')
+                                @if($usuario->deleted_at == null)
+                                    {{ Form::open(['route'=>['usuarios.destroy',$usuario],'method'=>'delete']) }}
+                                        {{ Form::submit('Eliminar Usuario',['class'=>'btn btn-danger pull-right']) }}
+                                    {{ Form::close() }}
+                                @else
+                                    {{ Form::model($usuario,['route'=>['usuarios.restore',$usuario],'method'=>'post']) }}
+                                        {{ Form::submit('Restaurar Usuario',['class'=>'btn btn-success pull-right']) }}
+                                    {{ Form::close() }}
+                                @endif
                             @endif
                         </div>
                     </div>
