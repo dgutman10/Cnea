@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Curso;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class CursoController extends Controller
 {
@@ -14,9 +16,15 @@ class CursoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $cursos = Curso::with(['usuarios' =>function($q){
+            $q->where('role','<>','admin');
+            }])
+            ->ofNombre($request->get('nombre'))
+            ->orderBy('nombre')
+            ->paginate(10);
+        return view('cursos.index', compact('cursos'));
     }
 
     /**
@@ -26,7 +34,7 @@ class CursoController extends Controller
      */
     public function create()
     {
-        //
+        return view('cursos.create');
     }
 
     /**
@@ -37,7 +45,15 @@ class CursoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nombre' => 'required|unique:cursos,nombre'
+        ]);
+
+        $curso = Curso::create($request->all());
+        $curso->save();
+
+        Session::flash("message","Se han guardado los datos!");
+        return redirect()->route('cursos.index');
     }
 
     /**
@@ -48,7 +64,10 @@ class CursoController extends Controller
      */
     public function show($id)
     {
-        //
+        $curso = Curso::with(['usuarios' =>function($q){
+            $q->where('role','<>','admin');
+        }])->findOrFail($id);
+        return view('cursos.show', compact('curso'));
     }
 
     /**
@@ -59,7 +78,8 @@ class CursoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $curso = Curso::findOrFail($id);
+        return view('cursos.edit', compact('curso'));
     }
 
     /**
@@ -71,7 +91,17 @@ class CursoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $curso = Curso::findOrFail($id);
+
+        $this->validate($request, [
+            'nombre' => 'required|unique:cursos,nombre,'.$id
+        ]);
+
+        $curso->nombre = $request->nombre;
+        $curso->save();
+
+        Session::flash("message","Se han guardado los datos!");
+        return redirect()->route('cursos.show',$id);
     }
 
     /**
@@ -82,6 +112,10 @@ class CursoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $curso = Curso::findOrFail($id);
+        $curso->usuarios()->detach();
+        $curso->delete();
+        Session::flash('message','Se han recuperado los datos!');
+        return redirect()->route('cursos.index');
     }
 }

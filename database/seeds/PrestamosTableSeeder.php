@@ -11,6 +11,6 @@ class PrestamosTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Prestamo::class, 100)->create();
+        factory(\App\Prestamo::class, 30)->create();
     }
 }

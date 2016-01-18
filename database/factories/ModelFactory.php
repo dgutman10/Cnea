@@ -14,8 +14,8 @@
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
         'name'              => $faker->name,
-        'email'             => $faker->email,
-        'password'          => bcrypt(str_random(10)),
+        'email'             => $faker->unique()->email,
+        'password'          => 'secret',
         'telephone'         => $faker->phoneNumber,
         'role'              => $faker->randomElement(['admin','profesor','alumno']),
         'remember_token'    => str_random(10),
@@ -35,7 +35,7 @@ $factory->define(\App\Instrumento::class, function (Faker\Generator $faker) {
         'img_url'       => $faker->imageUrl(),
         'descripcion'   => $faker->text($maxNbChars = 1000),
         'observaciones' => $faker->text($maxNbChars = 140),
-        'estado'        => $faker->randomElement(['prestado','disponible']),
+        'estado_prestamo' => $faker->randomElement(['prestado','disponible']),
     ];
 });
 
@@ -61,9 +61,12 @@ $factory->define(\App\Instructivo::class, function (Faker\Generator $faker) {
 
 $factory->define(\App\Prestamo::class, function (Faker\Generator $faker) {
     return [
-        'presta'            => $faker->numberBetween($min = 1, $max = 20),
-        'recibe'            => $faker->numberBetween($min = 1, $max = 20),
-        'laboratorio_id'    => $faker->numberBetween($min = 1, $max = 20),
+        'usuario_presta'            => $faker->numberBetween($min = 1, $max = 20),
+        'usuario_recibe'            => $faker->numberBetween($min = 1, $max = 20),
+        'laboratorio_id'    => $faker->numberBetween($min = 1, $max = 12),
+        'curso_id'          => $faker->numberBetween($min = 1, $max = 12),
+        'instrumento_id'    => $faker->numberBetween($min = 1, $max = 50),
+        'estado_prestamo'            => $faker->randomElement(['abierto','terminado']),
         'mail'              => $faker->email,
         'telefono'          => $faker->phoneNumber,
     ];

@@ -11,6 +11,6 @@ class LaboratoriosTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Laboratorio::class, 20)->create();
+        factory(\App\Laboratorio::class, 12)->create();
     }
 }

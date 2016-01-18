@@ -17,9 +17,9 @@ class CreateInstrumentosTable extends Migration
             $table->string('nombre')->unique();
             $table->integer('inventario')->unique();
             $table->string('img_url');
-            $table->text('descripcion');
-            $table->text('observaciones');
-            $table->enum('estado',['prestado','disponible']);
+            $table->text('descripcion')->nullable();
+            $table->text('observaciones')->nullable();
+            $table->enum('estado_prestamo',['prestado','disponible']);
             $table->timestamps();
             $table->softDeletes();
         });

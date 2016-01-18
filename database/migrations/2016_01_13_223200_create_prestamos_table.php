@@ -14,9 +14,12 @@ class CreatePrestamosTable extends Migration
     {
         Schema::create('prestamos', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('presta')->unsigned();
-            $table->integer('recibe')->unsigned();
-            $table->integer('laboratorio_id')->unsigned();
+            $table->integer('usuario_presta')->index();
+            $table->integer('usuario_recibe')->nullable()->index();
+            $table->integer('laboratorio_id')->nullable()->index();
+            $table->integer('curso_id')->nullable()->index();
+            $table->integer('instrumento_id')->index();
+            $table->enum('estado_prestamo',['abierto','terminado']);
             $table->string('mail');
             $table->string('telefono');
             $table->timestamps();

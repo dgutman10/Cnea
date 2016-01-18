@@ -13,7 +13,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role', 'telephone'
     ];
 
     /**
@@ -30,4 +30,121 @@ class User extends Authenticatable
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    /**
+     * @param $value
+     * @return string
+     */
+    public function setPasswordAttribute($value)
+    {
+        return $this->attributes['password'] = bcrypt($value);
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function cursos()
+    {
+        return $this->belongsToMany('App\Curso','curso_usuarios');
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function laboratorios()
+    {
+        return $this->belongsToMany('App\Laboratorio','laboratorio_usuarios');
+    }
+
+    /**
+     * @param $query
+     * @param $name
+     * @return mixed
+     */
+    public function scopeOfName($query, $name)
+    {
+        if(! empty($name))
+        {
+            return $query->where('name','LIKE',"%$name%");
+        }
+    }
+
+    /**
+     * @param $query
+     * @param $roles
+     * @return mixed
+     */
+    public function scopeOfRoles($query, $roles)
+    {
+        if(count($roles) > 0)
+        {
+            return $query->whereIn('role',$roles);
+        }
+
+    }
+
+    /**
+     * @param $query
+     * @param $cursos
+     * @return mixed
+     */
+    public function scopeOfCursos($query, $cursos)
+    {
+        if(count($cursos) > 0)
+        {
+            return $query->whereHas('cursos', function($q) use($cursos)
+            {
+                return $q->whereIn('curso_id',$cursos);
+            });
+        }
+    }
+
+    /**
+     * @param $query
+     * @param $laboratorios
+     * @return mixed
+     */
+    public function scopeOfLaboratorios($query, $laboratorios)
+    {
+        if( count($laboratorios) > 0)
+        {
+            return $query->whereHas('laboratorios', function($q) use($laboratorios)
+            {
+                return $q->whereIn('laboratorio_id',$laboratorios);
+            });
+        }
+    }
+
+    public function scopeOfEstado($query, $estado){
+        if(empty($estado) OR $estado == '')
+        {
+            $query->withTrashed();
+        }
+        elseif($estado == 2)
+        {
+            $query->onlyTrashed();
+        }
+    }
+
+    public static function obtenerCursos($cursos)
+    {
+        $res = array();
+
+        foreach ($cursos as $curso) {
+             $res[] = $curso->pivot->curso_id;
+        }
+
+        return $res;
+    }
+
+    public static function obtenerLaboratorios($laboratorios)
+    {
+        $res = array();
+
+        foreach ($laboratorios as $laboratorio) {
+            $res[] = $laboratorio->pivot->laboratorio_id;
+        }
+
+        return $res;
+    }
 }

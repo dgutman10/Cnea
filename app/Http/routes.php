@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +25,23 @@ Route::get('/', function () {
 */
 
 Route::group(['middleware' => ['web']], function () {
-    //
+    Route::auth();
+    Route::get('/', function(){
+        return redirect()->route('instrumentos.index');
+    });
+    Route::resource('/instrumentos','InstrumentoController',['only'=>['index','show']]);
 });
 
-Route::group(['middleware' => 'web'], function () {
-    Route::auth();
+Route::group(['middleware' => ['web','auth']], function () {
 
-    Route::get('/home', 'HomeController@index');
+    Route::post('/usuarios/restore/{id}', ['as'=>'usuarios.restore', 'uses'=>'UsuarioController@restore']);
+    Route::post('/instrumentos/restore/{id}', ['as'=>'instrumentos.restore', 'uses'=>'InstrumentoController@restore']);
+    Route::resource('/perfil','PerfilController',['only'=>['edit','update']]);
+    Route::resource('/usuarios', 'UsuarioController');
+    Route::resource('/tags','TagController');
+    Route::resource('/instrumentos','InstrumentoController',['except'=>['index','show']]);
+    Route::resource('/cursos','CursoController');
+    Route::resource('/laboratorios','LaboratorioController');
+    Route::resource('/prestamos','PrestamoController');
+
 });

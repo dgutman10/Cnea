@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Laboratorio;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 class LaboratorioController extends Controller
 {
@@ -14,9 +16,11 @@ class LaboratorioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $laboratorios = Laboratorio::OfNombre($request->get('nombre'))
+            ->paginate(10);
+        return view('laboratorios.index', compact('laboratorios'));
     }
 
     /**
@@ -26,7 +30,7 @@ class LaboratorioController extends Controller
      */
     public function create()
     {
-        //
+        return view('laboratios.create');
     }
 
     /**
@@ -37,7 +41,14 @@ class LaboratorioController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'nombre' => 'required|unique:laboratorios,nombre'
+        ]);
+
+        $laboratorio = Laboratorio::create($request->all());
+        $laboratorio->save();
+        Session::flash('message','Se han guardado los datos!');
+        return redirect()->route('laboratorios.index');
     }
 
     /**
@@ -48,7 +59,8 @@ class LaboratorioController extends Controller
      */
     public function show($id)
     {
-        //
+        $laboratorio = Laboratorio::findOrFail($id);
+        return view('laboratorios.show', compact('laboratorio'));
     }
 
     /**
@@ -59,7 +71,8 @@ class LaboratorioController extends Controller
      */
     public function edit($id)
     {
-        //
+        $laboratorio = Laboratorio::findOrFail($id);
+        return view('laboratorios.edit', compact('laboratorio'));
     }
 
     /**
@@ -71,7 +84,16 @@ class LaboratorioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $laboratorio = Laboratorio::findOrFail($id);
+
+        $this->validate($request, [
+            'nombre' => 'required|unique:laboratorios,nombre,'.$id
+        ]);
+
+        $laboratorio->nombre = $request->nombre;
+        $laboratorio->save();
+        Session::flash('message','Se han eliminado los datos!');
+        return redirect()->route('laboratorios.show',$id);
     }
 
     /**
@@ -82,6 +104,10 @@ class LaboratorioController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $laboratorio = Laboratorio::findOrFail($id);
+        $laboratorio->usuarios()->detach();
+        $laboratorio->delete();
+        Session::flash('message','Se han recuperado los datos!');
+        return redirect()->route('laboratorios.index');
     }
 }
