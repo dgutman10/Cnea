@@ -46,10 +46,7 @@
         /* Custom page CSS
         -------------------------------------------------- */
         /* Not required for template or sticky footer method. */
-
-        body > .container {
-            padding: 60px 15px 0;
-        }
+        
         .container .text-muted {
             margin: 20px 0;
         }
