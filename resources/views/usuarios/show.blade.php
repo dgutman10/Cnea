@@ -83,7 +83,7 @@
                                 <p class="text-danger">El usuario no se encuentra registrado en ningún Laboratorio</p>
                             @else
                                 @foreach($usuario->laboratorios as $laboratorio)
-                                    <a class="label label-primary label-inline" href="{{ route('cursos.show',$laboratorio->id) }}">{{ $laboratorio->nombre }}</a>
+                                    <a class="label label-primary label-inline" href="{{ route('laboratorios.show',$laboratorio->id) }}">{{ $laboratorio->nombre }}</a>
                                 @endforeach
                             @endif
 

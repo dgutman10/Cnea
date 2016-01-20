@@ -5,7 +5,7 @@
 </div>
 
 <div class="form-group">
-    {{ Form::label('tags[]','Bucar por Tags') }}
+    {{ Form::label('tags[]','Buscar por Tags') }}
     {{ Form::select('tags[]',$tags,Request::input('tags'), ['class'=>'form-control input-sm select2','multiple'=>true]) }}
 </div>
 <div class="form-group">

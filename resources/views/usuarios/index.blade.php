@@ -26,14 +26,15 @@
                         </div>
                     </div>
 
-                    <table class="table table-hover">
-                        <thead>
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
                             <th>Nombre</th>
                             <th>Permisos</th>
                             <th>Actividad</th>
                             <th>Acciones</th>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
                             @foreach($usuarios as $usuario)
                                 <tr>
                                     <td>{{ $usuario->name }}</td>
@@ -52,8 +53,10 @@
                                     </td>
                                 </tr>
                             @endforeach
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
+
                 </div>
                 {{ $usuarios->appends(Request::only(['name','role','curso','laboratorio','estado']))->render() }}
             </div>

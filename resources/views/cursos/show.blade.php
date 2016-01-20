@@ -64,9 +64,11 @@
                                         </p>
                                         @foreach($curso->usuarios as $usuario)
                                             @if($usuario->role == 'profesor' )
-                                                <label class="label label-primary label-inline">
-                                                    {{ $usuario->name }}
-                                                </label>
+                                                <a style="text-decoration: none;" href="{{ route('usuarios.show',$usuario->id) }}">
+                                                    <span class="label label-primary label-inline">
+                                                        {{ $usuario->name }}
+                                                    </span>
+                                                </a>
                                             @endif
                                         @endforeach
                                         <p class="lead">
@@ -74,9 +76,11 @@
                                         </p>
                                         @foreach($curso->usuarios as $usuario)
                                             @if($usuario->role == 'alumno' )
-                                                <label class="label label-primary label-inline">
-                                                    {{ $usuario->name }}
-                                                </label>
+                                                <a style="text-decoration: none;" href="{{ route('usuarios.show',$usuario->id) }}">
+                                                    <span class="label label-primary label-inline">
+                                                        {{ $usuario->name }}
+                                                    </span>
+                                                </a>
                                             @endif
                                         @endforeach
                                     </div>

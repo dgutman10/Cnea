@@ -34,7 +34,7 @@
                     <div class="panel-body">
                             <div class="row">
                                 <div class="col-md-6">
-                                    <img class="img-responsive thumbnail" src="{{ $instrumento->img_url }}" alt="{{ $instrumento->nombre }}"/>
+                                    <img class="img-responsive img-rounded" src="{{ $instrumento->img_url }}" alt="{{ $instrumento->nombre }}"/>
                                 </div>
                                 <div class="col-md-6">
                                     <h5 class="lead"><a href="{{ route('instrumentos.show',$instrumento) }}">{{ $instrumento->nombre }}</a></h5>
@@ -80,16 +80,17 @@
 
                                 </div>
                             </div>
+                            <hr>
                             <div class="row">
                                 <div class="col-md-6">
                                     <p class="lead">Descripción</p>
-                                    <p>
+                                    <p style="word-wrap: break-word">
                                         {{ $instrumento->descripcion }}
                                     </p>
                                 </div>
                                 <div class="col-md-6">
                                     <p class="lead">Observaciones</p>
-                                    <p>{{ $instrumento->observaciones }}</p>
+                                    <p style="word-wrap: break-word">{{ $instrumento->observaciones }}</p>
                                     <div class="text-center">
                                         <p>Codigo QR:</p>
                                         <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(200)->generate(Request::fullUrl())) !!} ">

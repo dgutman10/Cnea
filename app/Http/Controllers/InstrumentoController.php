@@ -27,7 +27,7 @@ class InstrumentoController extends Controller
             ->ofTags($request->tags)
             ->ofPrestamo($request->prestamo)
             ->ofEstado($request->estado)
-            ->paginate(10);
+            ->paginate(12);
 
         $tags = Tag::lists('nombre','id');
         $usuarios = array_add(User::lists('name','id'),'','');
@@ -41,7 +41,8 @@ class InstrumentoController extends Controller
      */
     public function create()
     {
-        return view('instrumentos.create');
+        $tags = Tag::lists('nombre','id');
+        return view('instrumentos.create', compact('tags'));
     }
 
     /**
@@ -76,6 +77,11 @@ class InstrumentoController extends Controller
         $instrumento->save();
 
         Storage::put($url_save, File::get($img));
+
+        $instrumento->tags()->attach($request->tags);
+
+        Session::flash("message","Se han guardado los datos!");
+        return redirect()->route('instrumentos.index');
 
     }
 

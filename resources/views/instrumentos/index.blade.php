@@ -32,13 +32,12 @@
                         <br>
 
                         @foreach($instrumentos as $instrumento)
-
                             <div class="row">
                                 <div class="col-md-6">
-                                    <img class="img-responsive thumbnail" src="{!! $instrumento->img_url !!}" alt="{{ $instrumento->nombre }}"/>
+                                    <img class="img-responsive img-rounded" src="{!! $instrumento->img_url !!}" alt="{{ $instrumento->nombre }}"/>
                                 </div>
                                 <div class="col-md-6">
-                                    <h5 class="lead"><a href="{{ route('instrumentos.show',$instrumento) }}">{{ $instrumento->nombre }}</a></h5>
+                                    <h3><a style="text-decoration: none;" href="{{ route('instrumentos.show',$instrumento) }}">{{ $instrumento->nombre }}</a></h3>
                                     <div class="row">
 
                                         <div class="col-md-6">
@@ -67,7 +66,7 @@
                                         <div class="col-md-6">
                                             <dl>
                                                 <dt>Descripcion:</dt>
-                                                <dd>{{ str_limit($instrumento->descripcion,140,'...') }}</dd>
+                                                <dd style="word-wrap: break-word">{{ str_limit($instrumento->descripcion,140,'...') }}</dd>
                                             </dl>
                                         </div>
 

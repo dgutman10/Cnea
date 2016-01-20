@@ -62,12 +62,15 @@
                                 <div class="row">
                                     @foreach($tag->instrumentos as $instrumento)
                                         <div class="col-md-4">
-                                            <hr>
-                                            <h5 style="text-align: center;">{{ $instrumento->nombre }}</h5>
-                                            <img class="thumbnail img-responsive" src="{{ $instrumento->img_url }}" alt="{{ $instrumento->nombre }}" />
-                                            <p style="overflow-y: auto; height: 100px;">{{ str_limit($instrumento->descripcion,140,'...') }}</p>
-                                            <a class="btn btn-info center-block" href="{{ route('instrumentos.show',$instrumento->id) }}"><i class="fa fa-search"> Ver</i></a>
-                                            <hr>
+                                            <a style="text-decoration: none;" href="{{ route('instrumentos.show',$instrumento->id) }}">
+                                                <div class="thumbnail">
+                                                    <img src="{{ $instrumento->img_url }}" alt="{{ $instrumento->nombre }}" />
+                                                    <div class="caption">
+                                                        <h4 style="text-align: center;" class="text-primary">{{ $instrumento->nombre }}</h4>
+                                                        <p style="overflow-y: auto; word-wrap: break-word; height: 100px;">{{ str_limit($instrumento->descripcion,140,'...') }}</p>
+                                                    </div>
+                                                </div>
+                                            </a>
                                         </div>
                                     @endforeach
                                 </div>
