@@ -56,11 +56,16 @@ class User extends Authenticatable
         return $this->belongsToMany('App\Laboratorio','laboratorio_usuarios');
     }
 
-    /**
-     * @param $query
-     * @param $name
-     * @return mixed
-     */
+    public function prestar()
+    {
+        return $this->hasMany('App\Prestamo', 'usuario_presta');
+    }
+
+    public function recibir()
+    {
+        return $this->hasMany('App\Prestamo','usuario_recibe');
+    }
+
     public function scopeOfName($query, $name)
     {
         if(! empty($name))
@@ -69,11 +74,6 @@ class User extends Authenticatable
         }
     }
 
-    /**
-     * @param $query
-     * @param $roles
-     * @return mixed
-     */
     public function scopeOfRoles($query, $roles)
     {
         if(count($roles) > 0)
@@ -83,11 +83,6 @@ class User extends Authenticatable
 
     }
 
-    /**
-     * @param $query
-     * @param $cursos
-     * @return mixed
-     */
     public function scopeOfCursos($query, $cursos)
     {
         if(count($cursos) > 0)
@@ -99,11 +94,6 @@ class User extends Authenticatable
         }
     }
 
-    /**
-     * @param $query
-     * @param $laboratorios
-     * @return mixed
-     */
     public function scopeOfLaboratorios($query, $laboratorios)
     {
         if( count($laboratorios) > 0)

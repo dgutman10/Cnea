@@ -24,7 +24,7 @@ class Instrumento extends Model
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function prestamos()
+    public function prestamo()
     {
         return $this->hasMany('App\Prestamo','instrumento_id');
     }

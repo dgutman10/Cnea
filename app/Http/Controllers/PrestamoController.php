@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Prestamo;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -16,7 +17,9 @@ class PrestamoController extends Controller
      */
     public function index()
     {
-        //
+        $prestamos = Prestamo::with(['usuarioPresta', 'usuarioRecibe'])->paginate();
+
+        return view('prestamos.index', compact('prestamos'));
     }
 
     /**

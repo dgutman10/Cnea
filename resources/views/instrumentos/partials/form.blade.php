@@ -12,6 +12,10 @@
         {{ Form::file('img') }}
     </div>
     <div class="form-group">
+        {{ Form::label('manual','Subir un manual') }}
+        {{ Form::file('manual') }}
+    </div>
+    <div class="form-group">
         {{ Form::label('tags[]','Tags') }}
         {{ Form::select('tags[]',$tags, (isset($tags_instrumento))? $tags_instrumento : null, ['class'=>'form-control input-sm select2', 'multiple' => true]) }}
     </div>

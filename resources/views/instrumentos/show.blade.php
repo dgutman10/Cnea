@@ -46,14 +46,14 @@
                                                 <dd>#{{ $instrumento->inventario }}</dd>
                                                 @if($instrumento->estado_prestamo == 'prestado')
                                                     <dt>Situación de prestamo:</dt>
-                                                    <dd><span class="label label-danger">Prestado</span></dd>
+                                                    <dd><span class="label label-danger"><b>Prestado por</b> {{ $instrumento->prestamo->last()->usuarioPresta->name }} ---> {{ $instrumento->prestamo->last()->usuarioRecibe->name }}  </span></dd>
                                                 @else
                                                     <dt>Situación de prestamo:</dt>
                                                     <dd><span class="label label-success">Instrumento Disponible</span></dd>
                                                 @endif
                                                 @if($instrumento->deleted_at == null)
                                                     <dt>Estado del Instrumento:</dt>
-                                                    <dd><span class="label label-success">Activo</span></dd>
+                                                    <dd><span class="label label-success">En funcionamiento</span></dd>
                                                 @else
                                                     <dt>Estado del Instrumento:</dt>
                                                     <dd><span class="label label-danger">Dado de Baja</span></dd>
@@ -92,8 +92,15 @@
                                     <p class="lead">Observaciones</p>
                                     <p style="word-wrap: break-word">{{ $instrumento->observaciones }}</p>
                                     <div class="text-center">
+                                        @if($instrumento->manual_url)
+                                            <p>
+                                                <a href="{{ $instrumento->manual_url }}" download>DESCARGAR MANUAL DE USO</a>
+                                            </p>
+                                        @endif
                                         <p>Codigo QR:</p>
-                                        <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(200)->generate(Request::fullUrl())) !!} ">
+                                        <a download="{{ $instrumento->nombre }}-qr.png" href="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(200)->generate(Request::fullUrl())) !!}" title="Codigo QR">
+                                            <img src="data:image/png;base64, {!! base64_encode(QrCode::format('png')->size(200)->generate(Request::fullUrl())) !!} "/>
+                                        </a>
                                     </div>
                                 </div>
                             </div>

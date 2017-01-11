@@ -22,7 +22,7 @@ class InstrumentoController extends Controller
      */
     public function index(Request $request)
     {
-        $instrumentos = Instrumento::with('tags')
+        $instrumentos = Instrumento::with(['tags','prestamo'])
             ->ofNOmbre($request->nombre)
             ->ofTags($request->tags)
             ->ofPrestamo($request->prestamo)
@@ -58,17 +58,23 @@ class InstrumentoController extends Controller
             'inventario'    => 'required|unique:instrumentos,inventario',
             'descripcion'   => 'string',
             'observaciones' => 'string',
-            'img'           => 'required|image'
+            'img'           => 'required|image',
+            'manual'        => ($request->file('manual'))? 'mimes:pdf,docx,pptx,pub,doc,ods,ppdf,ppt,odt,swd,txt,rtf,tif':''
         ]);
 
         $id = Instrumento::orderBy('id')->select('id')->get()->last()->id += 1;
+
         $img = $request->file('img');
-        $url_save = '/Instrumentos/'.$id.'.'.$img->getClientOriginalExtension();
+        $image_url_save = '/Instrumentos/'.$id.'/img/img.'.$img->getClientOriginalExtension();
+
+        $manual = $request->file('manual');
+        $manual_url_save = '/Instrumentos/'.$id.'/manual/manual.'.$manual->getClientOriginalExtension();
 
         $instrumento = Instrumento::create([
             'nombre'            => $request->nombre,
             'inventario'        => $request->inventario,
-            'img_url'           => $url_save,
+            'img_url'           => $image_url_save,
+            'manual_url'        => $manual_url_save,
             'descripcion'       => $request->descripcion,
             'observaciones'     => $request->observaciones,
             'estado'            => 'disponible'
@@ -76,7 +82,8 @@ class InstrumentoController extends Controller
 
         $instrumento->save();
 
-        Storage::put($url_save, File::get($img));
+        Storage::put($image_url_save, File::get($img));
+        Storage::put($manual_url_save, File::get($manual));
 
         $instrumento->tags()->attach($request->tags);
 
@@ -128,14 +135,23 @@ class InstrumentoController extends Controller
             'descripcion'   => 'string',
             'observaciones' => 'string',
             'img'           => ($request->file('img'))? 'image':'',
+            'manual'        => ($request->file('manual'))? 'mimes:pdf,docx,pptx,pub,doc,ods,ppdf,ppt,odt,swd,txt,rtf,tif':''
         ]);
 
         if($request->img)
         {
             $img = $request->file('img');
-            $url_save = '/Instrumentos/'.$id.'.'.$img->getClientOriginalExtension();
+            $url_save = '/Instrumentos/'.$id.'/img/img.'.$img->getClientOriginalExtension();
             $instrumento->img_url = $url_save;
             Storage::put($url_save, File::get($img));
+        }
+
+        if($request->manual)
+        {
+            $manual = $request->file('manual');
+            $url_save = '/Instrumentos/'.$id.'/manual/manual.'.$manual->getClientOriginalExtension();
+            $instrumento->manual_url = $url_save;
+            Storage::put($url_save, File::get($manual));
         }
 
         $instrumento->nombre = $request->nombre;

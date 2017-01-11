@@ -25,7 +25,7 @@
                     <li @if(Route::is('instrumentos.*')) class="active" @endif><a href="{{ route('instrumentos.index') }}"><i class="fa fa-compass"> Instrumentos</i></a></li>
                     <li @if(Route::is('cursos.*')) class="active" @endif><a href="{{ route('cursos.index') }}"><i class="fa fa-graduation-cap"> Cursos</i></a></li>
                     <li @if(Route::is('laboratorios.*')) class="active" @endif><a href="{{ route('laboratorios.index') }}"><i class="fa fa-flask"> Laboratorios</i></a></li>
-                    <li @if(Route::is('prestamos.*')) class="active" @endif><a href="#En Reparación"><i class="fa fa-share-alt"> Prestamos</i></a></li>
+                    <li @if(Route::is('prestamos.*')) class="active" @endif><a href="{{ route('prestamos.index') }}"><i class="fa fa-share-alt"> Prestamos</i></a></li>
                 @endif
             </ul>
 

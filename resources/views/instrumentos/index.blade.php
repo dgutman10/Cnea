@@ -33,11 +33,11 @@
 
                         @foreach($instrumentos as $instrumento)
                             <div class="row">
-                                <div class="col-md-6">
-                                    <img class="img-responsive img-rounded" src="{!! $instrumento->img_url !!}" alt="{{ $instrumento->nombre }}"/>
+                                <div class="col-md-3">
+                                    <img class="img-responsive img-rounded thumbnail" style="margin-top: 14px;" src="{!! $instrumento->img_url !!}" alt="{{ $instrumento->nombre }}"/>
                                 </div>
-                                <div class="col-md-6">
-                                    <h3><a style="text-decoration: none;" href="{{ route('instrumentos.show',$instrumento) }}">{{ $instrumento->nombre }}</a></h3>
+                                <div class="col-md-9">
+                                    <h4><a style="text-decoration: none;" href="{{ route('instrumentos.show',$instrumento) }}">{{ $instrumento->nombre }}</a></h4>
                                     <div class="row">
 
                                         <div class="col-md-6">
@@ -46,14 +46,14 @@
                                                 <dd>#{{ $instrumento->inventario }}</dd>
                                                 @if($instrumento->estado_prestamo == 'prestado')
                                                     <dt>Situación de prestamo:</dt>
-                                                    <dd><span class="label label-danger">Prestado</span></dd>
+                                                    <dd><span class="label label-danger"><b>Prestado por</b> {{ $instrumento->prestamo->last()->usuarioPresta->name }} ---> {{ $instrumento->prestamo->last()->usuarioRecibe->name }}  </span></dd>
                                                 @else
                                                     <dt>Situación de prestamo:</dt>
                                                     <dd><span class="label label-success">Instrumento Disponible</span></dd>
                                                 @endif
                                                 @if($instrumento->deleted_at == null)
                                                     <dt>Estado del Instrumento:</dt>
-                                                    <dd><span class="label label-success">Activo</span></dd>
+                                                    <dd><span class="label label-success">En funcionamiento</span></dd>
                                                 @else
                                                     <dt>Estado del Instrumento:</dt>
                                                     <dd><span class="label label-danger">Dado de Baja</span></dd>
