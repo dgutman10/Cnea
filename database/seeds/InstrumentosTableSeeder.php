@@ -26,7 +26,7 @@ class InstrumentosTableSeeder extends Seeder
                         'mail' => 'mail@mail.com',
                         'telefono' => '11111111',
                     ]);
-                    $e->prestamos()->save($prestamo);
+                    $e->prestamo()->save($prestamo);
                 }
                 else
                 {
@@ -42,7 +42,7 @@ class InstrumentosTableSeeder extends Seeder
                             'mail' => 'mail@mail.com',
                             'telefono' => '11111111',
                         ]);
-                        $e->prestamos()->save($prestamo);
+                        $e->prestamo()->save($prestamo);
                         $set = 0;
                     }
 
@@ -56,7 +56,7 @@ class InstrumentosTableSeeder extends Seeder
                         'mail' => 'mail@mail.com',
                         'telefono' => '11111111',
                     ]);
-                    $e->prestamos()->save($prestamo);
+                    $e->prestamo()->save($prestamo);
                 }
             }
         });
