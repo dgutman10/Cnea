@@ -20,12 +20,12 @@
             <!-- Left Side Of Navbar -->
             <ul class="nav navbar-nav">
                 @if(Auth::check())
-                    <li @if(Route::is('usuarios.*')) class="active" @endif><a href="{{ route('usuarios.index') }}"><i class="fa fa-users"> Usuarios</i></a></li>
-                    <li @if(Route::is('tags.*')) class="active" @endif><a href="{{ route('tags.index') }}"><i class="fa fa-tags"> Tags</i></a></li>
-                    <li @if(Route::is('instrumentos.*')) class="active" @endif><a href="{{ route('instrumentos.index') }}"><i class="fa fa-compass"> Instrumentos</i></a></li>
-                    <li @if(Route::is('cursos.*')) class="active" @endif><a href="{{ route('cursos.index') }}"><i class="fa fa-graduation-cap"> Cursos</i></a></li>
-                    <li @if(Route::is('laboratorios.*')) class="active" @endif><a href="{{ route('laboratorios.index') }}"><i class="fa fa-flask"> Laboratorios</i></a></li>
-                    <li @if(Route::is('prestamos.*')) class="active" @endif><a href="{{ route('prestamos.index') }}"><i class="fa fa-share-alt"> Prestamos</i></a></li>
+                    <li @if(Route::is('usuarios.*')) class="active" @endif><a href="{{ route('usuarios.index') }}"><i class="fa fa-users"></i> Usuarios</a></li>
+                    <li @if(Route::is('tags.*')) class="active" @endif><a href="{{ route('tags.index') }}"><i class="fa fa-tags"></i> Tags</a></li>
+                    <li @if(Route::is('instrumentos.*')) class="active" @endif><a href="{{ route('instrumentos.index') }}"><i class="fa fa-compass"></i> Instrumentos</a></li>
+                    <li @if(Route::is('cursos.*')) class="active" @endif><a href="{{ route('cursos.index') }}"><i class="fa fa-graduation-cap"></i> Cursos</a></li>
+                    <li @if(Route::is('laboratorios.*')) class="active" @endif><a href="{{ route('laboratorios.index') }}"><i class="fa fa-flask"></i> Laboratorios</a></li>
+                    <li @if(Route::is('prestamos.*')) class="active" @endif><a href="{{ route('prestamos.index', ['estado'=>'abierto']) }}"><i class="fa fa-share-alt"></i> Prestamos</a></li>
                 @endif
             </ul>
 

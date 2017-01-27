@@ -22,7 +22,7 @@
                             <p class="text-info" style="margin-top: 6px;">Total de Cursos Encontrados: {{ $cursos->total() }}</p>
                         </div>
                         <div class="col-md-6" style="text-align: right;">
-                            <a class="btn btn-primary btn-sm" href="{{ route('cursos.create') }}"><i class="fa fa-graduation-cap"> Nuevo Curso</i></a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('cursos.create') }}"><i class="fa fa-graduation-cap"></i> Nuevo Curso</a>
                         </div>
                     </div>
 
@@ -36,9 +36,9 @@
                             @foreach($cursos as $curso)
                                 <tr>
                                     <td>{{ $curso->nombre }}</td>
-                                    <td>{{ count($curso->usuarios) }}</td>
+                                    <td title="@foreach($curso->usuarios as $usuario) {{ $usuario->name . ' ' }} @endforeach">{{ count($curso->usuarios) }}</td>
                                     <td>
-                                        <a class="btn btn-default btn-xs" href="{{ route('cursos.show',$curso) }}"><i class="fa fa-eye"> Ver</i></a>
+                                        <a class="btn btn-default btn-xs" href="{{ route('cursos.show',$curso) }}"><i class="fa fa-eye"></i> Ver</a>
                                     </td>
                                 </tr>
                             @endforeach

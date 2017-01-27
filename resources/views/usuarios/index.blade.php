@@ -22,7 +22,7 @@
                             <p class="text-info" style="margin-top: 6px;">Total de Usuarios Encontrados: {{ $usuarios->total() }}</p>
                         </div>
                         <div class="col-md-6" style="text-align: right;">
-                            <a class="btn btn-primary btn-sm" href="{{ route('usuarios.create') }}"><i class="fa fa-user-plus"> Nuevo Usuario</i></a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('usuarios.create') }}"><i class="fa fa-user-plus"></i> Nuevo Usuario</a>
                         </div>
                     </div>
 
@@ -49,7 +49,7 @@
                                         </td>
                                     @endif
                                     <td>
-                                        <a class="btn btn-default btn-xs" href="{{ route('usuarios.show',$usuario) }}"><i class="fa fa-eye"> Ver</i></a>
+                                        <a class="btn btn-default btn-xs" href="{{ route('usuarios.show',$usuario) }}"><i class="fa fa-eye"></i> Ver</a>
                                     </td>
                                 </tr>
                             @endforeach

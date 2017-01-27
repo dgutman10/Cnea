@@ -8,7 +8,7 @@
                     <div class="panel-heading">Buscador</div>
 
                     <div class="panel-body">
-                        {{-- //@include('laboratorios/partials/search') --}}
+                        @include('prestamos/partials/search')
                     </div>
                 </div>
                 <hr>
@@ -22,28 +22,32 @@
                             <p class="text-info" style="margin-top: 6px;">Total de Prestamos Encontrados: {{ $prestamos->total() }}</p>
                         </div>
                         <div class="col-md-6" style="text-align: right;">
-                            <a class="btn btn-primary btn-sm" href="{{ route('prestamos.create') }}"><i class="fa fa-flask"> Nuevo Prestamo</i></a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('prestamos.create') }}"><i class="fa fa-share-alt"></i> Prestar un instrumento</a>
                         </div>
                     </div>
 
                     <table class="table table-hover">
                         <thead>
-                        <th>Nombre</th>
+                        <th>Instrumento</th>
+                        <th>Recibió</th>
+                        <th>Situación</th>
                         <th>Acciones</th>
                         </thead>
                         <tbody>
                         @foreach($prestamos as $prestamo)
                             <tr>
-                                <td>{{ $prestamo->usuarioPresta->name }}</td>
+                                <td>{{ $prestamo->instrumento->nombre }}</td>
+                                <td>{{ $prestamo->usuarioRecibe->name }}</td>
+                                <td>{{ config('cnea.prestamo_estado')[$prestamo->estado_prestamo] }}</td>
                                 <td>
-                                    {{--<a class="btn btn-default btn-xs" href="{{ route('laboratorios.show',$laboratorio) }}"><i class="fa fa-eye"> Ver</i></a>--}}
+                                    <a class="btn btn-default btn-xs" href="{{ route('prestamos.show',$prestamo) }}"><i class="fa fa-eye"></i> Ver</a>
                                 </td>
                             </tr>
                         @endforeach
                         </tbody>
                     </table>
                 </div>
-                {{-- $laboratorios->appends(Request::only(['nombre']))->render() --}}
+                {{ $prestamos->appends(Request::only(['estado']))->render() }}
             </div>
         </div>
     </div>

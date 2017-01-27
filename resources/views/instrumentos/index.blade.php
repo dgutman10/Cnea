@@ -24,7 +24,7 @@
                             </div>
                             <div class="col-md-6" style="text-align: right;">
                                 @if(Auth::check())
-                                    <a class="btn btn-primary btn-sm" href="{{ route('instrumentos.create') }}"><i class="fa fa-compass"> Nuevo Instrumento</i></a>
+                                    <a class="btn btn-primary btn-sm" href="{{ route('instrumentos.create') }}"><i class="fa fa-compass"></i> Nuevo Instrumento</a>
                                 @endif
                             </div>
                         </div>

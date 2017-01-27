@@ -22,7 +22,7 @@
                             <p class="text-info" style="margin-top: 6px;">Total de Laboratorios Encontrados: {{ $laboratorios->total() }}</p>
                         </div>
                         <div class="col-md-6" style="text-align: right;">
-                            <a class="btn btn-primary btn-sm" href="{{ route('laboratorios.create') }}"><i class="fa fa-flask"> Nuevo Laboratorio</i></a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('laboratorios.create') }}"><i class="fa fa-flask"></i> Nuevo Laboratorio</a>
                         </div>
                     </div>
 
@@ -36,7 +36,7 @@
                                 <tr>
                                     <td>{{ $laboratorio->nombre }}</td>
                                     <td>
-                                        <a class="btn btn-default btn-xs" href="{{ route('laboratorios.show',$laboratorio) }}"><i class="fa fa-eye"> Ver</i></a>
+                                        <a class="btn btn-default btn-xs" href="{{ route('laboratorios.show',$laboratorio) }}"><i class="fa fa-eye"></i> Ver</a>
                                     </td>
                                 </tr>
                             @endforeach

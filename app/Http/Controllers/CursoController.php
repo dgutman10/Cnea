@@ -101,6 +101,7 @@ class CursoController extends Controller
         $curso->save();
 
         Session::flash("message","Se han guardado los datos!");
+
         return redirect()->route('cursos.show',$id);
     }
 
@@ -115,7 +116,7 @@ class CursoController extends Controller
         $curso = Curso::findOrFail($id);
         $curso->usuarios()->detach();
         $curso->delete();
-        Session::flash('message','Se han recuperado los datos!');
+
         return redirect()->route('cursos.index');
     }
 }

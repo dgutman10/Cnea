@@ -15,9 +15,9 @@ class PrestamoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $prestamos = Prestamo::with(['usuarioPresta', 'usuarioRecibe'])->paginate();
+        $prestamos = Prestamo::with(['usuarioPresta', 'usuarioRecibe', 'instrumento'])->ofEstado($request->get('estado'))->paginate();
 
         return view('prestamos.index', compact('prestamos'));
     }
@@ -51,7 +51,9 @@ class PrestamoController extends Controller
      */
     public function show($id)
     {
-        //
+        $prestamo = Prestamo::findOrFail($id);
+
+        return view('prestamos.show', compact('prestamo'));
     }
 
     /**

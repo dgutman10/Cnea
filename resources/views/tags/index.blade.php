@@ -22,7 +22,7 @@
                             <p class="text-info" style="margin-top: 6px;">Total de Tags Encontrados: {{ $tags->total() }}</p>
                         </div>
                         <div class="col-md-6" style="text-align: right;">
-                            <a class="btn btn-primary btn-sm" href="{{ route('tags.create') }}"><i class="fa fa-tag"> Nuevo Tag</i></a>
+                            <a class="btn btn-primary btn-sm" href="{{ route('tags.create') }}"><i class="fa fa-tag"></i> Nuevo Tag</a>
                         </div>
                     </div>
 
@@ -38,7 +38,7 @@
                                     <td>{{ $tag->nombre }}</td>
                                     <td>{{ count($tag->instrumentos) }}</td>
                                     <td>
-                                        <a class="btn btn-default btn-xs" href="{{ route('tags.show',$tag) }}"><i class="fa fa-eye"> Ver</i></a>
+                                        <a class="btn btn-default btn-xs" href="{{ route('tags.show',$tag) }}"><i class="fa fa-eye"></i> Ver</a>
                                     </td>
                                 </tr>
                             @endforeach
