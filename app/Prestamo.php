@@ -33,6 +33,8 @@ class Prestamo extends Model
 
     public function scopeOfEstado($query, $estado)
     {
-        return $query->where('estado_prestamo', $estado);
+        if (!empty($estado) && $estado != '') {
+            return $query->where('estado_prestamo', $estado);
+        }
     }
 }

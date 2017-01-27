@@ -27,7 +27,6 @@ return [
     ],
 
     'prestamo_estado' => [
-        '' => '',
         'abierto' => 'Prestamo vigente',
         'terminado' => 'Prestamo finalizado'
 
