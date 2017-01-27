@@ -41,8 +41,8 @@
                         </a>
 
                         <ul class="dropdown-menu" role="menu">
-                            <li><a href="{{ route('perfil.edit',Auth::user()->id) }}"><i class="fa fa-edit"> Modificar mis datos</i></a></li>
-                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Logout</a></li>
+                            <li><a href="{{ route('perfil.edit',Auth::user()->id) }}"><i class="fa fa-edit"></i> Modificar mis datos</a></li>
+                            <li><a href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i> Cerrar sesión</a></li>
                         </ul>
                     </li>
                 @endif
