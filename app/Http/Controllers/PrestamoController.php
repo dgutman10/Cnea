@@ -97,7 +97,7 @@ class PrestamoController extends Controller
         $prestamo = Prestamo::findOrFail($id);
         $prestamo->update($request->all());
 
-        return redirect()->back();
+        return redirect()->route('prestamos.show', $id);
     }
 
     /**
