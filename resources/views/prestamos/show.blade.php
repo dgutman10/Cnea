@@ -18,7 +18,7 @@
 
                     @if(session()->get('index'))
                         <li>
-                            <a href="{{ url(session()->get('index')) }}">Ir a la lista de Prestamos</a>
+                            <a href="{{ url(session()->get('index')) }}">Ver todos los prestamos</a>
                         </li>
                     @else
                         <li>

@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Curso;
+use App\Instrumento;
+use App\Laboratorio;
 use App\Prestamo;
+use App\User;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\App;
 
 class PrestamoController extends Controller
 {
@@ -29,7 +34,12 @@ class PrestamoController extends Controller
      */
     public function create()
     {
-        //
+        $usuarios = User::lists('name','id');
+        $laboratorios = Laboratorio::orderBy('nombre', 'asc')->lists('nombre','id');
+        $cursos = Curso::orderBy('nombre', 'asc')->lists('nombre','id');
+        $instrumentos = Instrumento::orderBy('nombre', 'asc')->lists('nombre','id');
+
+        return view('prestamos.create', compact('usuarios', 'laboratorios', 'cursos', 'instrumentos'));
     }
 
     /**
@@ -40,7 +50,8 @@ class PrestamoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Prestamo::create($request->all());
+        return redirect()->route('prestamos.index', ['estado'=>'abierto']);
     }
 
     /**
@@ -64,7 +75,14 @@ class PrestamoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $prestamo = Prestamo::findOrFail($id);
+        $usuarios = User::lists('name','id');
+        $laboratorios = Laboratorio::lists('nombre','id');
+        $cursos = Curso::lists('nombre','id');
+        $instrumentos = Instrumento::lists('nombre','id');
+
+
+        return view('prestamos.edit', compact('prestamo', 'usuarios', 'laboratorios', 'cursos', 'instrumentos'));
     }
 
     /**
@@ -76,7 +94,10 @@ class PrestamoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $prestamo = Prestamo::findOrFail($id);
+        $prestamo->update($request->all());
+
+        return redirect()->back();
     }
 
     /**

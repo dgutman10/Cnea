@@ -6,6 +6,17 @@ use Illuminate\Database\Eloquent\Model;
 
 class Prestamo extends Model
 {
+    protected $fillable = [
+        'usuario_presta',
+        'usuario_recibe',
+        'laboratorio_id',
+        'curso_id',
+        'instrumento_id',
+        'estado_prestamo',
+        'mail',
+        'telefono'
+    ];
+
     public function usuarioPresta()
     {
         return $this->belongsTo('App\User', 'usuario_presta');

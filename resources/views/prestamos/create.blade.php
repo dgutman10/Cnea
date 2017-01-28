@@ -8,11 +8,11 @@
 
                     @if(session()->get('index'))
                         <li>
-                            <a href="{{ url(session()->get('index')) }}">Ir a la lista de Laboratorios</a>
+                            <a href="{{ url(session()->get('index')) }}">Ver todos los prestamos</a>
                         </li>
                     @else
                         <li>
-                            <a href="{{ route('laboratorios.index') }}">Ir a la lista de Laboratorios</a>
+                            <a href="{{ route('prestamos.index') }}">Ver todos los prestamos</a>
                         </li>
                     @endif
 
@@ -21,10 +21,10 @@
             </div>
             <div class="col-md-9">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Nuevo Laboratorio</div>
+                    <div class="panel-heading">Prestar instrumento</div>
                     <div class="panel-body">
-                        {{ Form::open(['route'=>['laboratorios.store'], 'method'=>'post']) }}
-                        @include('laboratorios.partials.form')
+                        {{ Form::open(['route'=>['prestamos.store'], 'method'=>'post']) }}
+                        @include('prestamos.partials.form')
                         {{ Form::close() }}
                     </div>
                 </div><!-- Fin de panel-body -->
