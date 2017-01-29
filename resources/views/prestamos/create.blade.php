@@ -32,3 +32,12 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $('.select2').select2({
+            placeholder: "Seleccione una opción",
+            allowClear: true
+        });
+    </script>
+@endsection

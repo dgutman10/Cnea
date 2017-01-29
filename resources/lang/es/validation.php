@@ -106,7 +106,12 @@ return [
     */
 
     'attributes' => [
-        //
+        'laboratorio_id' => 'Laboratorio',
+        'instrumento_id' => 'Instrumento',
+        'curso_id' => 'Curso',
+        'usuario_recibe' => '(Prestado a)',
+        'mail' => 'Mail',
+        'telefono' => 'Teléfono',
     ],
 
 ];

@@ -4,20 +4,20 @@
     </div>
     <div class="form-group">
         {{ Form::label('usuario_recibe','Prestado a:') }}
-        {{ Form::select('usuario_recibe',$usuarios, (isset($prestamo->usuario_recibe))? $prestamo->usuario_recibe : null, ['class'=>'form-control input-sm select2']) }}
+        {{ Form::select('usuario_recibe',$usuarios, (isset($prestamo->usuario_recibe))? $prestamo->usuario_recibe : null, ['class'=>'form-control input-sm select2', 'placeholder'=>'Seleccione']) }}
     </div>
     <div class="form-group">
         {{ Form::label('laboratorio_id','Laboratorio:') }}
-        {{ Form::select('laboratorio_id',$laboratorios, (isset($prestamo->laboratorio_id))? $prestamo->laboratorio_id : null, ['class'=>'form-control input-sm select2']) }}
+        {{ Form::select('laboratorio_id',$laboratorios, (isset($prestamo->laboratorio_id))? $prestamo->laboratorio_id : null, ['class'=>'form-control input-sm select2', 'placeholder'=>'Seleccione']) }}
     </div>
     <div class="form-group">
         {{ Form::label('curso_id','Curso:') }}
-        {{ Form::select('curso_id',$cursos, (isset($prestamo->curso_id))? $prestamo->curso_id : null, ['class'=>'form-control input-sm select2']) }}
+        {{ Form::select('curso_id',$cursos, (isset($prestamo->curso_id))? $prestamo->curso_id : null, ['class'=>'form-control input-sm select2', 'placeholder'=>'Seleccione']) }}
     </div>
     @if(!isset($prestamo))
         <div class="form-group">
             {{ Form::label('instrumento_id','Instrumento:') }}
-            {{ Form::select('instrumento_id',$instrumentos, (isset($prestamo->instrumento_id))? $prestamo->instrumento_id : null, ['class'=>'form-control input-sm select2']) }}
+            {{ Form::select('instrumento_id',$instrumentos, (isset($prestamo->instrumento_id))? $prestamo->instrumento_id : null, ['class'=>'form-control input-sm select2', 'placeholder'=>'Seleccione']) }}
         </div>
     @endif
     <div class="form-group">

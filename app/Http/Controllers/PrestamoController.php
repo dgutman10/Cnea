@@ -50,6 +50,16 @@ class PrestamoController extends Controller
      */
     public function store(Request $request)
     {
+        $this->validate($request, [
+            'usuario_presta'    => 'required',
+            'usuario_recibe'    => 'required',
+            'laboratorio_id'    => 'required',
+            'curso_id'          => 'required',
+            'instrumento_id'    => 'required',
+            'telefono'          => 'required',
+            'mail'             => 'required|email'
+        ]);
+
         Prestamo::create($request->all());
         return redirect()->route('prestamos.index', ['estado'=>'abierto']);
     }
@@ -94,6 +104,17 @@ class PrestamoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if(!isset($request->estado_prestamo)) {
+            $this->validate($request, [
+                'usuario_presta'    => 'required',
+                'usuario_recibe'    => 'required',
+                'laboratorio_id'    => 'required',
+                'curso_id'          => 'required',
+                'telefono'          => 'required',
+                'mail'              => 'required|email'
+            ]);
+        }
+        
         $prestamo = Prestamo::findOrFail($id);
         $prestamo->update($request->all());
 
