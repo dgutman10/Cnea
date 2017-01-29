@@ -59,6 +59,12 @@
                                 <dd>{{ $prestamo->updated_at }}</dd>
                             @endif
                         </dl>
+                        @if($prestamo->estado_prestamo == 'abierto')
+                            {{ Form::open(['route'=>['prestamos.update',$prestamo], 'method'=>'PUT']) }}
+                            {{ Form::hidden('estado_prestamo', 'terminado') }}
+                            {{ Form::submit('Terminar Prestamo', ['class'=>'btn btn-danger pull-right']) }}
+                            {{ Form::close() }}
+                        @endif
                     </div>
                 </div>
             </div>
