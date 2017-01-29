@@ -52,11 +52,11 @@
                             <dd> <a target="_blank" href="mailto:{{ $prestamo->mail }}">{{ $prestamo->mail }}</a> </dd>
 
                             <dt>Fecha inicio:</dt>
-                            <dd>{{ \Carbon\Carbon::parse($prestamo->created_at)->format("d/m/Y") }}</dd>
+                            <dd>{{ $prestamo->created_at)->format("d/m/Y - H:i:s") }}</dd>
 
                             @if($prestamo->estado_prestamo == 'terminado')
                                 <dt>Fecha de fin:</dt>
-                                <dd>{{ $prestamo->updated_at }}</dd>
+                                <dd>{{ $prestamo->updated_at)->format("d/m/Y - H:i:s") }}</dd>
                             @endif
                         </dl>
                         @if($prestamo->estado_prestamo == 'abierto')
