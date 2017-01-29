@@ -45,6 +45,6 @@
 </div>
 <div class="col-md-12">
     <div class="form-group">
-        {{ Form::submit((route::is('prestamos.edit'))? 'Guardar Cambios':'Crear Instrumento', ['class'=>'btn btn-success']) }}
+        {{ Form::submit((route::is('prestamos.edit'))? 'Guardar Cambios':'Realizar prestamo', ['class'=>'btn btn-success']) }}
     </div>
 </div>

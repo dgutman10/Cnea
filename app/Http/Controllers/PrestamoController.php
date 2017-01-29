@@ -37,7 +37,7 @@ class PrestamoController extends Controller
         $usuarios = User::lists('name','id');
         $laboratorios = Laboratorio::orderBy('nombre', 'asc')->lists('nombre','id');
         $cursos = Curso::orderBy('nombre', 'asc')->lists('nombre','id');
-        $instrumentos = Instrumento::orderBy('nombre', 'asc')->lists('nombre','id');
+        $instrumentos = Instrumento::orderBy('nombre', 'asc')->where('estado_prestamo', 'disponible')->lists('nombre','id');
 
         return view('prestamos.create', compact('usuarios', 'laboratorios', 'cursos', 'instrumentos'));
     }
@@ -59,6 +59,9 @@ class PrestamoController extends Controller
             'telefono'          => 'required',
             'mail'             => 'required|email'
         ]);
+        $instrumento = Instrumento::findOrFail($request->instrumento_id);
+        $instrumento->estado_prestamo = 'prestado';
+        $instrumento->save();
 
         Prestamo::create($request->all());
         return redirect()->route('prestamos.index', ['estado'=>'abierto']);
@@ -104,6 +107,7 @@ class PrestamoController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $prestamo = Prestamo::findOrFail($id);
         if(!isset($request->estado_prestamo)) {
             $this->validate($request, [
                 'usuario_presta'    => 'required',
@@ -113,9 +117,13 @@ class PrestamoController extends Controller
                 'telefono'          => 'required',
                 'mail'              => 'required|email'
             ]);
+        } else {
+            $instrumento = Instrumento::find($prestamo->instrumento_id);
+            $instrumento->estado_prestamo = 'disponible';
+            $instrumento->save();
         }
-        
-        $prestamo = Prestamo::findOrFail($id);
+
+
         $prestamo->update($request->all());
 
         return redirect()->route('prestamos.show', $id);
