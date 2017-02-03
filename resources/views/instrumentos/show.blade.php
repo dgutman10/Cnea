@@ -105,15 +105,17 @@
                                 </div>
                             </div>
                             <hr>
-                            @if(Auth::check() and Auth::user()->role == 'admin')
-                                @if($instrumento->deleted_at == null)
-                                    {{ Form::open(['route'=>['instrumentos.destroy',$instrumento],'method'=>'delete']) }}
-                                        {{ Form::submit('Eliminar Instrumento',['class'=>'btn btn-danger pull-right']) }}
-                                    {{ Form::close() }}
-                                @else
-                                    {{ Form::open(['route'=>['instrumentos.restore',$instrumento],'method'=>'post']) }}
-                                        {{ Form::submit('Restaurar Instrumento',['class'=>'btn btn-success pull-right']) }}
-                                    {{ Form::close() }}
+                            @if(Auth::check())
+                                @if(Auth::user()->role == 'admin' || Auth::user()->role == 'profesor')
+                                    @if($instrumento->deleted_at == null)
+                                        {{ Form::open(['route'=>['instrumentos.destroy',$instrumento],'method'=>'delete']) }}
+                                            {{ Form::submit('Eliminar Instrumento',['class'=>'btn btn-danger pull-right']) }}
+                                        {{ Form::close() }}
+                                    @else
+                                        {{ Form::open(['route'=>['instrumentos.restore',$instrumento],'method'=>'post']) }}
+                                            {{ Form::submit('Restaurar Instrumento',['class'=>'btn btn-success pull-right']) }}
+                                        {{ Form::close() }}
+                                    @endif
                                 @endif
                             @endif
                         </div>

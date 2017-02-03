@@ -22,12 +22,8 @@ class InstrumentoController extends Controller
      */
     public function index(Request $request)
     {
-        $instrumentos = Instrumento::with(['tags','prestamo'])
-            ->ofNOmbre($request->nombre)
-            ->ofTags($request->tags)
-            ->ofPrestamo($request->prestamo)
-            ->ofEstado($request->estado)
-            ->paginate(12);
+
+        $instrumentos = Instrumento::cargarLista($request);
 
         $tags = Tag::lists('nombre','id');
         $usuarios = array_add(User::lists('name','id'),'','');

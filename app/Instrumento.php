@@ -112,4 +112,35 @@ class Instrumento extends Model
         return $res;
     }
 
+    static public function cargarListaAdmin($request)
+    {
+        return Instrumento::with(['tags','prestamo'])
+            ->ofNOmbre($request->nombre)
+            ->ofTags($request->tags)
+            ->ofPrestamo($request->prestamo)
+            ->ofEstado($request->estado)
+            ->paginate(12);
+    }
+
+    static public function cargarListaAlumno($request)
+    {
+        return Instrumento::with(['tags','prestamo'])
+            ->ofNOmbre($request->nombre)
+            ->ofTags($request->tags)
+            ->ofPrestamo($request->prestamo)
+            ->where('deleted_at', null)
+            ->paginate(12);
+    }
+
+    static public function cargarLista($request)
+    {
+        if (auth()->check()) {
+            if (auth()->user()->role != "alumno") {
+                return self::cargarListaAdmin($request);
+            }
+        }
+
+        return self::cargarListaAlumno($request);
+    }
+
 }
