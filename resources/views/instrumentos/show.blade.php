@@ -51,6 +51,8 @@
                                                     <dt>Situación de prestamo:</dt>
                                                     <dd><span class="label label-success">Instrumento Disponible</span></dd>
                                                 @endif
+                                                <dt>Fecha de alta</dt>
+                                                <dd>{{ $instrumento->created_at }}</dd>
                                                 @if($instrumento->deleted_at == null)
                                                     <dt>Estado del Instrumento:</dt>
                                                     <dd><span class="label label-success">En funcionamiento</span></dd>
