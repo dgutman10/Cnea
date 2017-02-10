@@ -11,6 +11,7 @@
         {{ Form::label('telephone','Teléfono') }}
         {{ Form::text('telephone', null, ['class'=>'form-control input-sm']) }}
     </div>
+
     <div class="well well-sm">
         <div class="form-group">
             {{ Form::label('password','Contraseña') }}

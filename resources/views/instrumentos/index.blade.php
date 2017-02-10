@@ -87,7 +87,7 @@
 
                                 </div>
                             </div>
-                            <hr>
+                            <hr style="box-shadow: 1px 1px 3px silver;">
                         @endforeach
                     </div>
 

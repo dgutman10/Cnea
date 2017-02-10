@@ -106,6 +106,11 @@ class UsuarioController extends Controller
         }
         $usuario = User::findOrFail($id);
 
+        if ($usuario->role == 'admin') {
+            Session::flash("message","No puedes editar un usuario administrador!");
+            return redirect()->back();
+        }
+
         $usuario_lab = User::obtenerLaboratorios($usuario->laboratorios);
         $usuario_cur = User::obtenerCursos($usuario->cursos);
 
