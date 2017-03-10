@@ -7,6 +7,12 @@
         {{ Form::label('email','Email') }}
         {{ Form::email('email', null, ['class'=>'form-control input-sm']) }}
     </div>
+
+    <div class="form-group">
+        {{ Form::label('doc_number','Nro. Documento') }}
+        {{ Form::text('doc_number', null, ['class'=>'form-control input-sm']) }}
+    </div>
+
     <div class="form-group">
         {{ Form::label('telephone','Teléfono') }}
         {{ Form::text('telephone', null, ['class'=>'form-control input-sm']) }}

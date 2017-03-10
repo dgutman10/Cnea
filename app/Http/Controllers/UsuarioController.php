@@ -145,6 +145,7 @@ class UsuarioController extends Controller
             'password' => ($request->password) ? 'required|min:6|confirmed' : '',
             'role' => 'required|in:admin,profesor,alumno',
             'telephone' => 'required',
+            'doc_number' => 'required'
         ]);
 
 
@@ -153,6 +154,7 @@ class UsuarioController extends Controller
         if ($request->password) $user->password = $request->password;
         $user->role = $request->role;
         $user->telephone = $request->telephone;
+        $user->doc_number = $request->doc_number;
         $user->save();
 
         $user->laboratorios()->detach();

@@ -17,6 +17,7 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'email'             => $faker->unique()->email,
         'password'          => 'secret',
         'telephone'         => $faker->phoneNumber,
+        'doc_number'        => rand(10000000, 30000000),
         'role'              => $faker->randomElement(['admin','profesor','alumno']),
         'remember_token'    => str_random(10),
     ];

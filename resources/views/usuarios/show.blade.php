@@ -43,6 +43,9 @@
                                 <dt><span class="text-info">Teléfono:</span></dt>
                                 <dd>{{ $usuario->telephone }}</dd>
 
+                                <dt><span class="text-info">Nro. Documento:</span></dt>
+                                <dd>{{ $usuario->doc_number }}</dd>
+
                                 <dt><span class="text-info">Permisos de Usuario:</span></dt>
                                 <dd>{{ config('cnea.permisos_form')[$usuario->role] }}</dd>
 
