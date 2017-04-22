@@ -30,5 +30,13 @@ return [
         'abierto' => 'Prestamo vigente',
         'terminado' => 'Prestamo finalizado'
 
+    ],
+    'order' => [
+        'nombre' => 'Nombre',
+        'estado_prestamo' => 'Estado prestamo'
+    ],
+    'order_type' => [
+        'ASC' => 'Ascendente',
+        'DESC' => 'Descendente'
     ]
 ];

@@ -101,6 +101,32 @@ class Instrumento extends Model
         }
     }
 
+    public function scopeOfOrder($query, $order, $type)
+    {
+        if (empty($type)) {
+            $type = "ASC";
+        }
+
+        if (!empty($order)) {
+            return $query->orderBy($order, $type);
+        }
+
+    }
+
+    public function scopeOfDescription($query, $desc)
+    {
+        if (!empty($desc)) {
+            return $query->where('descripcion','like', "%$desc%");
+        }
+    }
+
+    public function scopeOfInventario($query, $inv)
+    {
+        if (!empty($inv)) {
+            return $query->where('inventario','like', "%$inv%");
+        }
+    }
+
     public static function obtenerTags($tags)
     {
         $res = array();
@@ -119,6 +145,9 @@ class Instrumento extends Model
             ->ofTags($request->tags)
             ->ofPrestamo($request->prestamo)
             ->ofEstado($request->estado)
+            ->ofDescription($request->descripcion)
+            ->ofInventario($request->inventario)
+            ->ofOrder($request->order, $request->order_type)
             ->paginate(12);
     }
 
@@ -129,6 +158,9 @@ class Instrumento extends Model
             ->ofTags($request->tags)
             ->ofPrestamo($request->prestamo)
             ->where('deleted_at', null)
+            ->ofDescription($request->descripcion)
+            ->ofInventario($request->inventario)
+            ->ofOrder($request->order, $request->order_type)
             ->paginate(12);
     }
 

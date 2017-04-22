@@ -92,7 +92,19 @@
                     </div>
 
                 </div>
-                {{ $instrumentos->appends(Request::only(['nombre','estado','tags','prestamo']))->render() }}
+                {{ $instrumentos->appends(Request::only(
+                    [
+                        'nombre',
+                        'estado',
+                        'tags',
+                        'prestamo',
+                        'order',
+                        'order_type',
+                        'descripcion',
+                        'inventario'
+                    ]
+                    ))->render()
+                }}
             </div>
         </div>
     </div>

@@ -8,7 +8,7 @@
                     <li @if(Route::is('instrumentos.show')) class="active" @endif>
                         <a href="{{ route('instrumentos.show',$instrumento) }}">Datos del Instrumento</a>
                     </li>
-                    @if(Auth::check())
+                    @if(Auth::check() && Auth::user()->role == 'admin' || Auth::user()->role == 'profesor')
                         @if($instrumento->deleted_at == null)
                             <li @if(Route::is('instrumentos.edit')) class="active" @endif>
                                 <a href="{{ route('instrumentos.edit',$instrumento) }}">Editar Instrumento</a>
